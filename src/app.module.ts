@@ -6,6 +6,13 @@ import { DevConfigService } from './common/providers/DevConfigService';
 import { SongsController } from './songs/songs.controller';
 import { SongsModule } from './songs/songs.module';
 
+const devConfig = {
+  port: 3000,
+};
+const proConfig = {
+  port: 4000,
+};
+
 @Module({
   imports: [SongsModule],
   controllers: [AppController],
@@ -14,6 +21,12 @@ import { SongsModule } from './songs/songs.module';
     {
       provide: DevConfigService,
       useClass: DevConfigService,
+    },
+    {
+      provide: 'CONFIG',
+      useFactory: () => {
+        return process.env.NODE_ENV === 'development' ? devConfig : proConfig;
+      },
     },
   ],
 })
