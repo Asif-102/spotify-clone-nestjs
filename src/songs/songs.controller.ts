@@ -3,8 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpException,
-  HttpStatus,
   Param,
   ParseIntPipe,
   Post,
@@ -24,17 +22,18 @@ export class SongsController {
 
   @Get()
   findAll() {
-    try {
-      return this.songsService.findAll();
-    } catch (e) {
-      throw new HttpException(
-        'server error',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        {
-          cause: e,
-        },
-      );
-    }
+    // try {
+    //   return this.songsService.findAll();
+    // } catch (e) {
+    //   throw new HttpException(
+    //     'server error',
+    //     HttpStatus.INTERNAL_SERVER_ERROR,
+    //     {
+    //       cause: e,
+    //     },
+    //   );
+    // }
+    return this.songsService.findAll();
   }
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
