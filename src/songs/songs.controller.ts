@@ -5,6 +5,8 @@ import {
   Get,
   HttpException,
   HttpStatus,
+  Param,
+  ParseIntPipe,
   Post,
   Put,
 } from '@nestjs/common';
@@ -35,8 +37,8 @@ export class SongsController {
     }
   }
   @Get(':id')
-  findOne() {
-    return 'fetched song on the besed on id';
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return `fetched song on the besed on id ${typeof id}`;
   }
 
   @Put(':id')
